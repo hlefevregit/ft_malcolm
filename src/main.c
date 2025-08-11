@@ -16,8 +16,14 @@ volatile sig_atomic_t running = 1;
 
 int	main(int ac, char **av)
 {
+
+	if (getuid() != 0) {
+		fprintf(stderr, "[Error] You must be root to run this program.\n");
+		return EXIT_FAILURE;
+	}
+
 	if (ac != 5) {
-		fprintf(stderr, "Usage: %s <source_ip> <source_max> <target_ip> <target_mac>\n", av[0]);
+		fprintf(stderr, "[Error] Usage: %s <source_ip> <source_mac> <target_ip> <target_mac>\n", av[0]);
 		return EXIT_FAILURE;
 	}
 
