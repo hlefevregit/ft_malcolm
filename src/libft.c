@@ -118,3 +118,12 @@ ssize_t	ft_strlen(const char *s)
 		len++;
 	return len;
 }
+
+uint32_t ft_ntohl(uint32_t netlong)
+{
+	uint16_t high = (uint16_t)(netlong >> 16);
+	uint16_t low = (uint16_t)(netlong & 0xFFFF);
+	uint32_t Hi = (uint32_t)ntohs(high);
+	uint32_t Lo = (uint32_t)ntohs(low);
+	return (Hi << 16) | Lo;
+}

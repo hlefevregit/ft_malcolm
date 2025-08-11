@@ -42,13 +42,14 @@
 
 // LIBFT
 
-int		ft_strtol(const char *str, int base);
-int		ft_isxdigit(int c);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void	*ft_memset(void *s, int c, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-ssize_t	ft_strlen(const char *s);
+int			ft_strtol(const char *str, int base);
+int			ft_isxdigit(int c);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void		*ft_memset(void *s, int c, size_t n);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
+ssize_t		ft_strlen(const char *s);
+uint32_t	ft_ntohl(uint32_t netlong);
 
 // Global flag to catch SIGINT
 extern volatile sig_atomic_t running;

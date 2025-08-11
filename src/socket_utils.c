@@ -18,7 +18,7 @@ int find_matching_interface(const struct in_addr *target_ip, char *if_name) {
 	if (getifaddrs(&ifaddr) == -1)
         return -1;
 
-	uint32_t t = ntohl(target_ip->s_addr);
+	uint32_t t = ft_ntohl(target_ip->s_addr);
 
 
 	for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
@@ -30,8 +30,8 @@ int find_matching_interface(const struct in_addr *target_ip, char *if_name) {
 		
 		if (!netmask) continue;
 
-		uint32_t ip = ntohl(addr->sin_addr.s_addr);
-		uint32_t mask = ntohl(netmask->sin_addr.s_addr);
+		uint32_t ip = ft_ntohl(addr->sin_addr.s_addr);
+		uint32_t mask = ft_ntohl(netmask->sin_addr.s_addr);
 
 		if ((ip & mask) == (t & mask)) {
 			ft_strlcpy(if_name, ifa->ifa_name, IFNAMSIZ - 1);
