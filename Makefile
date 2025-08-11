@@ -10,7 +10,8 @@ SRC_DIR = src
 SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/parse.c \
        $(SRC_DIR)/socket_utils.c \
-       $(SRC_DIR)/arp_handler.c
+       $(SRC_DIR)/arp_handler.c \
+       $(SRC_DIR)/libft.c
 
 OBJS = $(SRCS:.c=.o)
 

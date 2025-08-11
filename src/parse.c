@@ -22,7 +22,7 @@ int	parse_mac(const char *mac_str, unsigned char *mac_bytes)
 		if (!ft_isxdigit(byte_str[0]) || !ft_isxdigit(byte_str[1])) {
 			return -1; // Invalid character in MAC address
 		}
-		mac_bytes[i] = (unsigned char)ft_strtol(byte_str, NULL, 16);
+		mac_bytes[i] = (unsigned char)ft_strtol(byte_str, 16);
 		if (i < 5 && mac_str[i*3 + 2] != ':') {
 			return -1; // Missing colon separator
 		}

@@ -49,8 +49,8 @@ int	main(int ac, char **av)
 		return EXIT_FAILURE;
 	}
 	
-	if (wait_for_arp_request(sockfd, &src_ip, target_mac, (unsigned char*)&target_ip) == 0) {
-        send_arp_reply(sockfd, if_name, src_mac, &src_ip, target_mac, &target_ip);
+	if (wait_for_arp_request(sockfd, &source_ip, target_mac, (unsigned char*)&target_ip) == 0) {
+        send_arp_reply(sockfd, if_name, src_mac, &source_ip, target_mac, &target_ip);
     }
 
 	close(sockfd);

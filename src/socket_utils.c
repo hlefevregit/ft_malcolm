@@ -13,25 +13,36 @@
 #include "../includes/ft_malcolm.h"
 
 int find_matching_interface(const struct in_addr *target_ip, char *if_name) {
-	struct ifaddrs *ifaddr, *ifa;
-	
+	struct ifaddrs *ifaddr = NULL, *ifa = NULL;
+
 	if (getifaddrs(&ifaddr) == -1)
         return -1;
+
+	uint32_t t = ntohl(target_ip->s_addr);
+
 
 	for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
 		if (!ifa->ifa_addr || ifa->ifa_addr->sa_family != AF_INET)
 			continue;
 		
 		struct sockaddr_in *addr = (struct sockaddr_in *)ifa->ifa_addr;
-		if ((addr->sin_addr.s_addr & 0xFFFFFF00) == (target_ip->s_addr & 0xFFFFFF00)) {
+		struct sockaddr_in *netmask = (struct sockaddr_in *)ifa->ifa_netmask;
+		
+		if (!netmask) continue;
+
+		uint32_t ip = ntohl(addr->sin_addr.s_addr);
+		uint32_t mask = ntohl(netmask->sin_addr.s_addr);
+
+		if ((ip & mask) == (t & mask)) {
 			ft_strlcpy(if_name, ifa->ifa_name, IFNAMSIZ - 1);
-			if_name[IFNAMSIZ - 1] = '\0'; // Ensure null termination
+			// if_name[IFNAMSIZ - 1] = '\0'; // Ensure null termination
 			freeifaddrs(ifaddr);
 			return 0; // Found matching interface
 		}
 	}
 
 	freeifaddrs(ifaddr);
+	printf("[DEBUG] No matching interface found for IP %s\n", inet_ntoa(*target_ip));
 	return -1; // No matching interface found
 }
 

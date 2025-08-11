@@ -13,7 +13,7 @@
 #include "../includes/ft_malcolm.h"
 
 int wait_for_arp_request(int sockfd, const struct in_addr *spoofed_ip,
-							unsigned char *target_mac_out, unsigned cgar *target_ip_out)
+							unsigned char *target_mac_out, unsigned char *target_ip_out)
 {
 	unsigned char buffer[65536];
 	
@@ -60,7 +60,7 @@ int	send_arp_reply(int sockfd, const char *if_name, const unsigned char *src_mac
 	struct ether_header	*eth = (struct ether_header *)buffer;
 	struct ether_arp	*arp = (struct ether_arp *)(buffer + sizeof(struct ether_header));
 	struct sockaddr_ll	socket_addr;
-	int 				ifindex;
+	int 				if_index;
 
 	// ================= Ethernet Header =================
 	
